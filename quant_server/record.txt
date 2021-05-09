@@ -1,0 +1,13 @@
+python manage.py runserver
+python manage.py makemigrations quant
+python manage.py migrate
+
+
+admin kalvin / k135792684
+
+
+
+
+
+django-pandas转换
+https://pypi.org/project/django-pandas/  

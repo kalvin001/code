@@ -1,0 +1,21 @@
+@import "~@alifd/next/variables.scss";
+.TopHeader {
+    margin-top: -$shell-dark-content-paddingTop;
+    margin-right: -$shell-dark-content-paddingLeft;
+    margin-bottom: 0;
+    margin-left: -$shell-dark-content-paddingLeft;
+    padding: $shell-dark-content-paddingTop $shell-dark-content-paddingLeft;
+    background-color: $color-white;
+}
+
+.TabContainer{
+  background-color: $color-white;
+}
+.total {
+    color: #4a5b6d;
+    font-size: 12px;
+    span {
+      padding: 0 3px;
+      color: #5584ff;
+    }
+}
