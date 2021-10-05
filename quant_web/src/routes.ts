@@ -4,7 +4,11 @@ import StockBasic from '@/pages/DataAnalysis'
 import StockDetail from '@/pages/DataAnalysis/stock_detail'
 
 import Task from '@/pages/Task'
-import Trade from '@/pages/Trade';
+import Trade from '@/pages/Trade'
+import FutuTrade from '@/pages/Trade/futu'
+
+
+
 
 
 const routerConfig = [
@@ -21,6 +25,10 @@ const routerConfig = [
         component: StockDetail,
       },
       {
+        path: '/trade/futu',
+        component: FutuTrade,
+      },
+      {
         path: '/data',
         exact: true,
         component: DataManager,
@@ -32,7 +40,7 @@ const routerConfig = [
         path: '/trade',
         exact: true,
         component: Trade,
-      },
+      }
     ],
   },
 ];

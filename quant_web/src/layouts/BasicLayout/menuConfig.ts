@@ -33,7 +33,16 @@ const asideMenuConfig = [
   {
     name: '实盘对接',
     path: '/trade',
-    icon: 'smile',
+    icon: 'smile',   
+    children: [
+      {
+        name: '富途',
+        path: '/trade/futu',
+      },  {
+        name: '同花顺',
+        path: '/trade',
+      },
+    ]
   },
   {
     name: '对外开放',

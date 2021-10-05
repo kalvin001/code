@@ -126,6 +126,8 @@ def meta_tables(request,db_type="postgresql"):
 
 def futu_info(request):
     res = futu_api.accinfo_query()
-    return JsonResponse(res, safe=False, json_dumps_params={'ensure_ascii': False})
+    #return res[1].to_json()
+    
+    return JsonResponse(json.loads(res[1].to_json()), safe=False, json_dumps_params={'ensure_ascii': False})
 
     # null;
