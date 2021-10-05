@@ -12,4 +12,4 @@ def accinfo_query():
     trd_ctx.close()
     return res
 
-print(accinfo_query())
+print(accinfo_query()) 
