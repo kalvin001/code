@@ -1,0 +1,16 @@
+{
+    "LOG": {
+        "level": "info",
+
+        "handler": "stream"
+    },
+    "DINGTALK": "your dingding token",
+    "TUSHARE": "5d2773294dea485e06d949f132e3cf6a620a83fc3b46ee08a03b007d",
+    "SENDMAIL": {
+        "from": "823638751@qq.com",
+        "password": "gnpmnodlqftdbebh",
+        "to": "823638751@qq.com",
+        "server": "smtp.qq.com",
+        "port": 587
+    }
+}
