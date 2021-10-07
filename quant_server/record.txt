@@ -1,5 +1,8 @@
 python manage.py runserver
+
+#生成数据库SQL
 python manage.py makemigrations quant
+#执行SQL
 python manage.py migrate
 
 

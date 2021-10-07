@@ -53,7 +53,7 @@ def daily_trade():
             if index!=0:
                 if_exists = 'append'
             print(index,itm["ts_code"])
-            df = ts.pro_bar(ts_code=itm["ts_code"], adj='qfq',start_date='20130101', end_date='20210501') #前复权
+            df = ts.pro_bar(ts_code=itm["ts_code"], adj='qfq',start_date='20140101', end_date='20220501') #前复权
             df.to_sql(name="stock_trade_daily", con=sql_engine, if_exists=if_exists)
         except Exception:
             print("error--",itm)

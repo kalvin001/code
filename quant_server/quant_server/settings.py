@@ -90,6 +90,15 @@ DATABASES = {
     #     'PORT': '3306',
     # },
 
+    #  'default': {
+    #      'ENGINE': 'django.db.backends.mysql',
+    #      'NAME': 'quant',
+    #      'USER': 'kalvin',
+    #      'PASSWORD': 'Kk654321',
+    #      'HOST': 'am-wz9850nk5jow9ft38167320o.ads.aliyuncs.com',
+    #      'PORT': '3306',
+    # }
+    #,
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'quant',
@@ -131,7 +140,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False  #先不进行时区相关的问题处理 kangkai 21.10.06
 
 
 # Static files (CSS, JavaScript, Images)

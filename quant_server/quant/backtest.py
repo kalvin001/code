@@ -38,7 +38,7 @@ class BackTest:
             0
         )
 
-    def initialize(self, kline, origin_data=None):
+    def  initialize(self, kline, origin_data=None):
         """
         历史k线入口函数
         :param kline: 传入递增的k线

@@ -2,13 +2,25 @@ import baostock as bs
 import pandas as pd
 from utils.logger import logger
 from config import config
+from utils.tools import *
 import logging
 
 
 class BaoStockData:
 
     def __init__(self):
+        #bs.login()
         pass
+
+
+    @staticmethod
+    def query_latest_trade_date():
+        latest_trade_day = get_date("%Y-%m-%d",-10)
+        for itm in BaoStockData.query_trade_dates(start_date=latest_trade_day).iterrows():
+            if itm[1].is_trading_day == '1' and latest_trade_day < itm[1].calendar_date:
+                latest_trade_day = itm[1].calendar_date
+        return latest_trade_day
+
 
     @staticmethod
     def query_trade_dates(start_date=None, end_date=None):
@@ -85,7 +97,7 @@ class BaoStockData:
         return result
 
     @staticmethod
-    def query_history_k_data_plus(symbol, timeframe, adj=None, start_date=None, end_date=None):
+    def query_history_k_data_plus(code, timeframe, adj="2",start_date=None, end_date="9999-01-01",bs_param=None):
         """
         获取k线数据
         注意：
@@ -119,27 +131,39 @@ class BaoStockData:
         if 'm' in timeframe or 'h' in timeframe:
             fields = "date,time,code,open,high,low,close,volume,amount,adjustflag"
         elif "d" in timeframe:
-            fields = "date,code,open,high,low,close,preclose,volume,amount,adjustflag,turn,tradestatus,pctChg,isST"
+            fields = "date,code,open,high,low,close,preclose,volume,amount,adjustflag,turn,tradestatus,pctChg,peTTM,pbMRQ,psTTM,pcfNcfTTM,isST"
         elif 'w' in timeframe or 'M' in timeframe:
             fields = "date,code,open,high,low,close,volume,amount,adjustflag,turn,pctChg"
         else:
             logger.error("timeframe error !")
 
-        stock_name = 'sh.' + str(symbol).split('sh')[1] if str(symbol).startswith("sh") else 'sz.' + str(symbol).split('sz')[1]
+        #stock_name = 'sh.' + str(code).split('sh')[1] if str(code).startswith("sh") else 'sz.' + str(code).split('sz')[1]
+        stock_name = code
         adjust_flag = "3" if not adj else adj
 
-        lg = bs.login()
-        if lg.error_code != "0":
-            logger.error("error: {}".format(lg.error_msg))
+        if bs_param is None:
+            lg = bs.login()
+            if lg.error_code != "0":
+                logger.error("error: {}".format(lg.error_msg))
 
-        rs = bs.query_history_k_data_plus(
-            code=stock_name,
-            fields=fields,
-            start_date=start_date,
-            end_date=end_date,
-            frequency=frequency,
-            adjustflag=adjust_flag
-        )
+            rs = bs.query_history_k_data_plus(
+                code=stock_name,
+                fields=fields,
+                start_date=start_date,
+                end_date=end_date,
+                frequency=frequency,
+                adjustflag=adjust_flag
+            )
+        else:
+            rs = bs_param.query_history_k_data_plus(
+                code=stock_name,
+                fields=fields,
+                start_date=start_date,
+                end_date=end_date,
+                frequency=frequency,
+                adjustflag=adjust_flag
+            )
+
         if rs.error_code != "0":
             logger.error('query_history_k_data_plus respond error: {}'.format(rs.error_msg))
 
@@ -148,13 +172,14 @@ class BaoStockData:
             data_list.append(rs.get_row_data())
         result = pd.DataFrame(data_list, columns=rs.fields)
 
-        bs.logout()
+        # bs.logout()
 
         if 'm' in timeframe or 'h' in timeframe:
             result = result.drop("date", axis=1)
-        result = result.drop('code', axis=1)
-        result = result.values.tolist()
+        #result = result.drop('code', axis=1)
+        #result = result.values.tolist()
         return result
+
 
     @staticmethod
     def query_dividend_data(code, year, yearType):

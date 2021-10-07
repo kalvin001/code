@@ -15,7 +15,10 @@ class Strategy:
         #config.loads("config.json")
         self.asset = 10000
         self.backtest = BackTest()
-        data = Market.kline("sh600519",'1d',start_date="2010-01-01")
+        data = Market.kline("sh.600519",'1d',start_date="2010-01-01")
+        data = data.drop('code', axis=1)
+        data = data.values.tolist()
+        #print(data)
         self.buy_signal,self.sell_signal,self.ma20,self.ma30= [],[],[],[]
         self.kline = []
         for k in data:

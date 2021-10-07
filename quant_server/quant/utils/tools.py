@@ -218,3 +218,8 @@ def combine_kline(csv_file_path, interval):
     records = pd.read_csv("{}min_{}".format(interval, csv_file_path)) # 读取新文件，因为旧数据经处理后并不包含时间戳
     data = records.values.tolist()  # 将新读取的数据转换为列表数据类型
     return data
+
+
+if __name__ == '__main__':
+    pass
+    #print(get_date("%Y-%m-%d",-10))
